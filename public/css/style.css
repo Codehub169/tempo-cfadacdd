@@ -1,13 +1,17 @@
 :root {
     --primary-bg: #F8F5F0; /* Warm Off-White */
     --text-main: #3A3B3C;    /* Charcoal */
-    --text-subtle: #7D7D7D;  /* Medium Grey - slightly darker than A9A9A9 for better contrast on F8F5F0 */
+    --text-subtle: #7D7D7D;  /* Medium Grey */
     --accent-warm: #D2691E;  /* Chocolate */
     --accent-cool: #4682B4;  /* Steel Blue */
+    --accent-cool-rgb: 70, 130, 180; /* For rgba() usage */
     --neutral-light: #FFFFFF;
     --neutral-medium: #EAEAEA;
     --neutral-dark: #2C2C2C;
     --border-color: #DCDCDC;
+
+    --success-color: #10b981; /* Emerald Green for success messages */
+    --error-color: #ef4444;   /* Bright Red for error messages */
 
     --font-primary: 'Inter', sans-serif;
     --font-secondary: 'Space Grotesk', sans-serif;
@@ -115,7 +119,7 @@ img {
     align-items: center;
     justify-content: center;
     text-align: center;
-    background-color: var(--primary-bg); /* Can be a gradient or image later */
+    background-color: var(--primary-bg);
     padding: 2rem;
     position: relative;
 }
@@ -126,23 +130,17 @@ img {
 
 .logo-container {
     margin-bottom: 2rem;
-    /* Initial styles for logo animation if needed */
 }
 
 #hero-logo {
-    max-width: 200px; /* Adjust as needed */
+    max-width: 200px; 
     height: auto;
     opacity: 0; /* Initial state for JS animation */
-    transform: scale(0.8); /* Initial state for JS animation */
-    animation: fadeInLogo 1s ease-out 0.5s forwards; /* Basic CSS animation as fallback/initial */
+    transform: scale(0.95); /* Initial state for JS animation, matches JS initial setup */
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out; /* For JS-controlled animation */
 }
 
-@keyframes fadeInLogo {
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
+/* Removed @keyframes fadeInLogo as animation is now JS controlled with CSS transitions */
 
 .tagline {
     color: var(--text-main);
@@ -252,7 +250,7 @@ img {
 }
 
 .service-icon {
-    width: 50px; /* Adjust as needed */
+    width: 50px;
     height: 50px;
     margin-bottom: 1rem;
     margin-left: auto;
@@ -300,19 +298,8 @@ img {
     max-width: 600px;
     margin: 0 auto 2rem auto;
     border: 1px solid var(--border-color);
-    /* Note-like feel */
     position: relative;
 }
-
-/* Optional: Add lines for note-like feel */
-/* .contact-form::before {
-    content: '';
-    position: absolute;
-    top: 10px; left: 10px; right: 10px; bottom: 10px;
-    border: 1px dashed var(--text-subtle);
-    border-radius: var(--border-radius-sm);
-    pointer-events: none;
-} */
 
 .form-group {
     margin-bottom: 1.5rem;
@@ -344,12 +331,19 @@ img {
 .form-group textarea:focus {
     outline: none;
     border-color: var(--accent-cool);
-    box-shadow: 0 0 0 3px rgba(var(--accent-cool), 0.2);
+    box-shadow: 0 0 0 3px rgba(var(--accent-cool-rgb), 0.2);
 }
 
 .form-group textarea {
     resize: vertical;
     min-height: 120px;
+}
+
+.form-status-message {
+    margin-bottom: 1rem; /* Space it from the button below */
+    font-size: 0.95rem;
+    text-align: center;
+    /* Color is set by JS using --success-color or --error-color */
 }
 
 .cta-button {

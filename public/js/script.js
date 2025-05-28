@@ -1,35 +1,35 @@
 document.addEventListener('DOMContentLoaded', () => {
   // Smooth scrolling for navigation links
-  const navLinks = document.querySelectorAll('nav a[href^="#"], .scroll-indicator a[href^="#"]');
-  navLinks.forEach(link => {
+  const smoothScrollLinks = document.querySelectorAll('nav a[href^="#"], a.scroll-down-indicator[href^="#"]');
+  smoothScrollLinks.forEach(link => {
     link.addEventListener('click', function (e) {
       e.preventDefault();
       const targetId = this.getAttribute('href');
-      const targetElement = document.querySelector(targetId);
-      if (targetElement) {
-        targetElement.scrollIntoView({
-          behavior: 'smooth'
-        });
+      // Basic check for valid targetId (e.g. not just "#")
+      if (targetId && targetId.length > 1) {
+        try {
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                targetElement.scrollIntoView({
+                behavior: 'smooth'
+                });
+            }
+        } catch (error) {
+            console.error('Error finding element for smooth scroll:', targetId, error);
+        }
       }
     });
   });
 
-  // Hero logo animation (simple fade-in and scale-up for the img tag)
-  const heroLogo = document.querySelector('.hero-logo');
+  // Hero logo animation (triggered by JS, visual properties and transition defined in CSS)
+  const heroLogo = document.querySelector('#hero-logo'); // Updated selector to ID-based
   if (heroLogo) {
-    heroLogo.style.opacity = '0';
-    heroLogo.style.transform = 'scale(0.95)';
-    // The transition properties should be defined in CSS for better separation
-    // e.g., .hero-logo { transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
-    // Adding them here defensively if not in CSS, but CSS is preferred.
-    if (!getComputedStyle(heroLogo).transitionProperty.includes('opacity')) {
-        heroLogo.style.transition = 'opacity 0.8s ease-out, transform 0.8s ease-out';
-    }
-
+    // Initial styles (opacity: 0, transform: scale(0.95)) and transition are set in CSS.
+    // JS just triggers the animation after a short delay to ensure CSS is applied.
     setTimeout(() => {
       heroLogo.style.opacity = '1';
       heroLogo.style.transform = 'scale(1)';
-    }, 100); // Short delay to ensure initial styles are applied
+    }, 100); // Delay to ensure initial styles are rendered and transition occurs
   }
 
   // "Who Knew?" pop-out animation on scroll
@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const whoKnewObserver = new IntersectionObserver((entries, observer) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
+          entry.target.classList.add('is-visible'); // CSS handles the animation
           observer.unobserve(entry.target); // Animate only once
         }
       });
@@ -59,57 +59,67 @@ document.addEventListener('DOMContentLoaded', () => {
     contactForm.addEventListener('submit', async function (e) {
       e.preventDefault();
       const formData = new FormData(contactForm);
+      const plainFormData = Object.fromEntries(formData.entries());
+      const jsonDataString = JSON.stringify(plainFormData);
+
       const button = contactForm.querySelector('button[type="submit"]');
       const originalButtonText = button.textContent;
+      
       button.textContent = 'Sending...';
       button.disabled = true;
 
-      // Create a status message element if it doesn't exist
       let statusMessage = contactForm.querySelector('.form-status-message');
       if (!statusMessage) {
         statusMessage = document.createElement('p');
         statusMessage.className = 'form-status-message';
-        // Insert message before the button, or at the end of the form
-        contactForm.insertBefore(statusMessage, button);
+        // Insert message before the button for visibility
+        button.parentNode.insertBefore(statusMessage, button);
       }
       statusMessage.textContent = ''; // Clear previous messages
 
       try {
         const response = await fetch('/api/contact', {
           method: 'POST',
-          body: formData
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: jsonDataString
         });
 
+        const responseData = await response.json(); // Server is expected to send JSON
+
         if (response.ok) {
-          // const result = await response.json(); // Assuming server sends JSON response
-          statusMessage.textContent = 'Message sent successfully! We\'ll be in touch.';
-          statusMessage.style.color = 'var(--success, #10b981)';
+          statusMessage.textContent = responseData.message || 'Message sent successfully! We\'ll be in touch.';
+          statusMessage.style.color = 'var(--success-color, #10b981)'; 
           contactForm.reset();
         } else {
-          // const errorResult = await response.json(); // Assuming server sends JSON error
-          statusMessage.textContent = 'Something went wrong. Please try again.';
-          statusMessage.style.color = 'var(--error, #ef4444)';
+          statusMessage.textContent = responseData.message || 'Something went wrong. Please try again.';
+          statusMessage.style.color = 'var(--error-color, #ef4444)';
         }
-      } catch (error) {
+      } catch (error) { // Catches network errors or if response.json() fails
         console.error('Form submission error:', error);
-        statusMessage.textContent = 'Network error. Please check your connection and try again.';
-        statusMessage.style.color = 'var(--error, #ef4444)';
-      }
-      finally {
+        statusMessage.textContent = 'A network error occurred or the server response was not valid. Please try again.';
+        statusMessage.style.color = 'var(--error-color, #ef4444)';
+      } finally {
         button.textContent = originalButtonText;
         button.disabled = false;
-        setTimeout(() => { statusMessage.textContent = ''; }, 5000); // Clear message after 5s
+        setTimeout(() => { 
+          if (statusMessage) statusMessage.textContent = ''; 
+        }, 5000); // Clear message after 5 seconds
       }
     });
   }
 
-  // Playful scroll-down indicator (example: simple pulse, CSS should handle main animation)
-  const scrollIndicator = document.querySelector('.scroll-indicator');
+  // Scroll-down indicator interactions (if any beyond smooth scroll)
+  const scrollIndicator = document.querySelector('.scroll-down-indicator'); // Corrected selector
   if (scrollIndicator) {
-    // This is mostly to demonstrate JS interaction if needed.
-    // CSS animations are preferred for simple loops like pulsing.
-    // Example: Add a class on load to kickstart CSS animation if not already active
-    // scrollIndicator.classList.add('active');
+    // Current functionality for scroll-down-indicator is smooth scroll (handled above)
+    // and CSS animation (@keyframes bounce). No specific JS interaction added here for now.
   }
-
+  
+  // Set current year in footer
+  const currentYearSpan = document.getElementById('current-year');
+  if (currentYearSpan) {
+    currentYearSpan.textContent = new Date().getFullYear();
+  }
 });
