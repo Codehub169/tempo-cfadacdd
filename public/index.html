@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hueneu | Designs that whisper loud stories.</title>
+    <meta name="description" content="hueneu is a graphic design studio where stories find their aesthetic. We craft designs that whisper loud stories—quietly bold, intentionally evocative.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Favicon placeholders - replace with actual files later -->
+    <link rel="icon" href="/assets/images/favicon.ico" sizes="any">
+    <link rel="icon" href="/assets/images/favicon.svg" type="image/svg+xml">
+</head>
+<body>
+    <header id="hero-section" class="hero-section">
+        <div class="hero-content">
+            <div id="logo-container" class="logo-container">
+                <!-- Animated hueneu logo will be loaded here by script.js -->
+                <img src="assets/images/logo.svg" alt="hueneu logo" id="hero-logo">
+            </div>
+            <h1 class="tagline">Where stories find their aesthetic.</h1>
+            <p class="subtext">Designs that whisper loud stories.</p>
+        </div>
+        <a href="#story-section" class="scroll-down-indicator" aria-label="Scroll down to The hueneu Story">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 5V19M12 19L7 14M12 19L17 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+    </header>
+
+    <main>
+        <section id="story-section" class="content-section story-section">
+            <div class="container">
+                <h2>The <span class="hue-text">hue</span><span class="neu-text">neu</span> Story</h2>
+                <p>Hueneu is born from a dialogue between <strong class="hue-text">Hue</strong>—the vibrant bursts of creative color, the unexpected palettes that tell a story—and <strong class="neu-text">Neu</strong>—the grounding force of neutrality, the calm, intentional space that allows stories to breathe and resonate.</p>
+                <p>We believe in design that is quiet but bold, calm yet mysterious, and always a little playful. It's about creating experiences that surprise with those unexpected design moments, the ones that make you think... <span class="who-knew-highlight">“Who Knew?”</span></p>
+                <div id="who-knew-popout" class="who-knew-popout">
+                    <img src="https://images.unsplash.com/photo-1500964757637-c85e8a162699?w=800&q=80" alt="Abstract visual representing a 'Who Knew?' moment">
+                    <p>A little surprise!</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="what-we-do-section" class="content-section services-section">
+            <div class="container">
+                <h2>What We Do</h2>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <img src="assets/images/icon-branding.svg" alt="Branding Icon" class="service-icon">
+                        <h3>Branding</h3>
+                        <p>Identities that resonate, beyond the visual.</p>
+                    </div>
+                    <div class="service-card">
+                        <img src="assets/images/icon-packaging.svg" alt="Packaging Icon" class="service-icon">
+                        <h3>Packaging</h3>
+                        <p>Packaging, but make it poetic.</p>
+                    </div>
+                    <div class="service-card">
+                        <img src="assets/images/icon-social-media.svg" alt="Social Media Icon" class="service-icon">
+                        <h3>Social Media</h3>
+                        <p>Digital narratives that captivate and connect.</p>
+                    </div>
+                    <div class="service-card">
+                        <img src="assets/images/icon-stationery.svg" alt="Stationery Icon" class="service-icon">
+                        <h3>Stationery</h3>
+                        <p>Tactile stories, beautifully told.</p>
+                    </div>
+                    <div class="service-card">
+                        <img src="assets/images/icon-coffee-table-books.svg" alt="Coffee Table Books Icon" class="service-icon">
+                        <h3>Coffee Table Books</h3>
+                        <p>Curated volumes that invite and inspire.</p>
+                    </div>
+                    <div class="service-card">
+                        <img src="assets/images/icon-creative-projects.svg" alt="Creative Projects Icon" class="service-icon">
+                        <h3>Creative Projects</h3>
+                        <p>Your unique vision, brought to life with intention.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="why-hueneu-section" class="content-section why-section">
+            <div class="container">
+                <h2>Why hueneu?</h2>
+                <p class="poetic-copy">We don’t just design—we decode stories.</p>
+                <p class="poetic-copy">We listen for the unsaid, crafting visuals that speak quietly but stay with you, long after you’ve looked away.</p>
+                <p class="poetic-copy">In a world of noise, we seek the calm. In the expected, we find the mystery. In every project, we find the balance.</p>
+            </div>
+        </section>
+
+        <section id="contact-section" class="content-section contact-section">
+            <div class="container">
+                <h2>Let’s Work Together</h2>
+                <form id="contact-form" class="contact-form">
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Your Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Your Story (or project idea!)</label>
+                        <textarea id="message" name="message" rows="6" required></textarea>
+                    </div>
+                    <button type="submit" class="cta-button">Let’s design your story</button>
+                </form>
+                <div class="social-links">
+                    <p>Find us on Instagram: <a href="https://www.instagram.com/hueneu_/" target="_blank" rel="noopener noreferrer">@hueneu_</a></p>
+                </div>
+                 <!-- Optional: Embed link to services deck or visual -->
+                <div class="extra-links">
+                    <!-- <a href="/path/to/services-deck.pdf" target="_blank" class="deck-link">View Our Services Deck</a> -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; <span id="current-year"></span> hueneu. All rights reserved.</p>
+            <p>Where stories find their aesthetic.</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js" defer></script>
+</body>
+</html>

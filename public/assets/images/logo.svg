@@ -1,0 +1,23 @@
+<svg id="hueneu-logo-svg" width="220" height="50" viewBox="0 0 220 50" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .hueneu-logo-text {
+      font-family: 'Space Grotesk', 'Inter', sans-serif; /* Define preferred fonts */
+      font-size: 38px;
+      font-weight: 500; /* Medium weight for clarity and elegance */
+      letter-spacing: 0.5px;
+      dominant-baseline: central; /* Better vertical alignment */
+    }
+    /* It's better to define fill colors via CSS for easier theming if this SVG is inlined */
+    /* However, for <img> tag, these internal styles will apply */
+    #logo-hue {
+      fill: #D2691E; /* --accent-warm (Chocolate) */
+    }
+    #logo-neu {
+      fill: #3A3B3C; /* --text-main (Charcoal) */
+    }
+  </style>
+  <text y="25" class="hueneu-logo-text">
+    <tspan id="logo-hue" x="10">hue</tspan>
+    <tspan id="logo-neu" x="95">neu</tspan>
+  </text>
+</svg>
