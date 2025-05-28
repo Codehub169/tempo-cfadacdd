@@ -92,7 +92,7 @@ a:hover, a:focus {
     text-decoration: underline;
 }
 
-img {
+img, svg {
     max-width: 100%;
     height: auto;
     display: block;
@@ -134,13 +134,30 @@ img {
 
 #hero-logo {
     max-width: 200px; 
-    height: auto;
+    height: auto; /* Height will scale based on max-width and SVG's viewBox aspect ratio */
     opacity: 0; /* Initial state for JS animation */
     transform: scale(0.95); /* Initial state for JS animation, matches JS initial setup */
     transition: opacity 0.8s ease-out, transform 0.8s ease-out; /* For JS-controlled animation */
+    /* Ensure SVG fills its container if specific dimensions on SVG element are smaller */
+    width: 100%; /* This will make it responsive within the max-width: 200px */
 }
 
-/* Removed @keyframes fadeInLogo as animation is now JS controlled with CSS transitions */
+/* Styles for inlined SVG logo text elements */
+#hero-logo .hueneu-logo-text {
+    font-family: var(--font-secondary);
+    font-size: 38px; /* Consider adjusting if SVG scales significantly or use relative units */
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    dominant-baseline: central;
+}
+
+#hero-logo #logo-hue {
+    fill: var(--hue-color); /* This is --accent-warm */
+}
+
+#hero-logo #logo-neu {
+    fill: var(--text-main); /* Original logo used main text color for 'neu' */
+}
 
 .tagline {
     color: var(--text-main);
@@ -255,7 +272,7 @@ img {
     margin-bottom: 1rem;
     margin-left: auto;
     margin-right: auto;
-    color: var(--accent-cool);
+    color: var(--accent-cool); /* This color is for the container, SVG icons have their own stroke */
 }
 
 .service-card h3 {
