@@ -13,8 +13,18 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
-# Create database directory if it doesn't exist (server.js will create the file)
+# Create database directory if it doesn't exist
 mkdir -p database
+
+# Define the database file path
+DB_FILE="database/hueneu.sqlite3"
+
+# If the database file exists, remove it to ensure a fresh start
+# This is to prevent the SQLITE_NOTADB error if the file is corrupted or empty
+if [ -f "$DB_FILE" ]; then
+  echo "Found existing database file $DB_FILE. Removing it to ensure a clean start and prevent SQLITE_NOTADB errors."
+  rm -f "$DB_FILE"
+fi
 
 # Set the port for the application
 export PORT=9000
@@ -27,6 +37,8 @@ echo "Starting the application on port $PORT..."
 npm start
 
 # Check if the server started successfully
+# This checks if npm start itself failed to launch the process.
+# It won't catch errors if the server starts then crashes later.
 if [ $? -ne 0 ]; then
   echo "Failed to start the server. Please check src/server.js and logs."
   exit 1
